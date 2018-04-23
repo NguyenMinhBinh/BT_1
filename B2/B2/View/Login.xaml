@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:B2.Converters"
+             x:Class="B2.View.Login"
+             Title="Master">
+    <!--tạo định dạng Resources kiểu giống css dùng cho page này, nếu muốn dùng cho cả project 
+    thì khai báo trong App.xaml-->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:PasswordStrengthToColorConverter x:Key="PasswordStrengthToColorConverter" />
+            <Color x:Key="TextColor">Blue</Color>
+            <Color x:Key="PlaceholderColor">Pink</Color>
+            <!--tạo Resources dùng riêng cho Entry và gán tiếp giá trị là 2 Resources trên-->
+            <Style x:Key="MyTextStyle" TargetType="Entry">
+                <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+                <Setter Property="Placeholder" Value="{StaticResource TextColor}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <!--chia màn hình thành 2 phần 6/4-->
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+            <!--tạo hình nền-->
+            <Image Source="img_header_background_1" Aspect="Fill"></Image>
+            <Grid Padding="40,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <!--còn bao nhiêu nhận bấy nhiêu-->
+                    <RowDefinition Height="18"/>
+                    <!--18dp:  user-->
+                    <RowDefinition Height="Auto"/>
+                    <!--auto: nhập user-->
+                    <RowDefinition Height="18"/>
+                    <!--  pass-->
+                    <RowDefinition Height="Auto"/>
+                    <!--  nhập pass-->
+                    <RowDefinition Height="24"/>
+                    <!--khoảng nằm dưới nhập pass-->
+                </Grid.RowDefinitions>
+                <!--ko set nhận la row 0-->
+                <Image Source="logo_splash" HorizontalOptions="Center" VerticalOptions="Center" />
+                <!--grid.row ="1" ==> row 1-->
+                <Label Grid.Row="1"
+                           TextColor="{StaticResource TextColor}" 
+                           Text="User" >
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String">
+                            <On Platform="Android" Value="Poppins-Regular.ttf#Poppins" />
+                            <On Platform="iOS" Value="Poppins-Regular" />
+                        </OnPlatform>
+                    </Label.FontFamily>
+                </Label>
+                <!--dùng Resources-->
+                <Entry Grid.Row="2"
+                           x:Name="user"
+                           TextColor="White"
+                           Text="{Binding Username}"
+                           PlaceholderColor="{StaticResource PlaceholderColor}" 
+                           Placeholder="user"/>
+                <!--dùng Resources-->
+                <Label Grid.Row="3"
+                           TextColor="White"
+                           Text="Password"/>
+                <StackLayout Grid.Row="4">
+                    <Entry 
+                           x:Name="pass"
+                           Style="{StaticResource MyTextStyle}"
+                           PlaceholderColor="Black"
+                           IsPassword="true"
+                           Text="{Binding Password}"
+                           Placeholder="pass"/>
+                    <!--dùng Resources "style" tên MyTextStyle sẽ nhận tất cả cài đặt của MyTextStyle-->
+                    <Label Text="{Binding PasswordStreng}" FontSize="20" TextColor="{Binding PasswordStreng,  Converter={StaticResource PasswordStrengthToColorConverter}" />
+                </StackLayout>
+            </Grid>
+            <!--button Login nằm trong phần 4 ko có hình nền, và margin cho lùi lên trên -30 nên nằm đè lên phần 6-->
+
+                <Button x:Name="btn_Login" VerticalOptions="Start" BackgroundColor="White" 
+                        Command="{Binding LoginCommand}" Text="Sign In" Grid.Row="1" Margin="30,-30, 30, 0" HeightRequest="60" />
+                <Button x:Name="btn_Photo" VerticalOptions="Start" BackgroundColor="White"
+                        Command="{Binding PhotoCommand}" Text="Photo" Grid.Row="1" Margin="30,30, 30, 0" HeightRequest="60" />
+            <!--<Image x:Name="MyImage" Source="icon.png" Grid.Row="1" />-->
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

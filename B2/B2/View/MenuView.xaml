@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tl="clr-namespace:B2.Template"
+             x:Class="B2.View.MenuView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+            <Grid.RowDefinitions>
+                <!--chia màn hình thành 2 phần 6/4-->
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="7*" />
+            </Grid.RowDefinitions>
+                
+                <!--đây là grid.row"0"-->
+                <Image Source="img_header_background_1"  Aspect="Fill"></Image>
+                <!--tạo bóng mờ-->
+                <BoxView BackgroundColor="Black" Opacity="0.8" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+                <Label Text="Hello John Doe" TextColor="White" VerticalOptions="EndAndExpand" HorizontalOptions="Center"
+                       Margin="0,0,0,20"></Label>
+                
+                
+                <!--<Grid Padding="40,20" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="7*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    --><!--phải HorizontalOptions="Start" VerticalOptions="Center" mới chỉnh kích thước hình dc--><!--
+                    <Image Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="30" WidthRequest="30" Source="rating.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBookingView" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    
+                    <Label Grid.Row="0" Grid.Column="1" Text="Book A Room" VerticalOptions="Center">
+                        --><!--tạo tapped để nhận sự kiện--><!--
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnBookingView" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    
+                    <Image Grid.Row="1" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="30" WidthRequest="30" Source="rating.png"></Image>
+                    <Label Grid.Row="1" Grid.Column="1" Text="My Room" VerticalOptions="Center"></Label>
+                    <Image Grid.Row="2" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="30" WidthRequest="30" Source="rating.png"></Image>
+                    <Label Grid.Row="2" Grid.Column="1" Text="Suggesstions" VerticalOptions="Center"></Label>
+                    <Image Grid.Row="3" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="30" WidthRequest="30" Source="rating.png"></Image>
+                    <Label Grid.Row="3" Grid.Column="1" Text="Concierge" VerticalOptions="Center"></Label>
+                    <Image Grid.Row="4" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" HeightRequest="30" WidthRequest="30" Source="rating.png"></Image>
+                    <Label Grid.Row="4" Grid.Column="1" Text="Logout" VerticalOptions="Center"></Label>
+                </Grid>-->
+
+                <ListView Grid.Row="1" ItemsSource="{Binding Menu}" x:Name="Mylistview" ItemSelected="Listview_Onclicked">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <!--<StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding icon}"/>
+                                    <Label Text="{Binding Title}"
+                                   VerticalTextAlignment="Center"
+                                   FontAttributes="Bold"/>
+                                </StackLayout>-->
+                                
+                                <tl:MenuItemTemplate/>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+            </Grid>
+            <!--<ActivityIndicator HeightRequest="20" WidthRequest="20" IsRunning="True" IsVisible="True"/>-->
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
